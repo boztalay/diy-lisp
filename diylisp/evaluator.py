@@ -128,7 +128,7 @@ def evaluate(ast, env):
                 return env.lookup(ast[1])
     elif ast[0] == "lambda":
         if len(ast) != 3:
-            raise LispError("lamba takes two arguments: %s" % unparse(ast))
+            raise LispError("lambda takes two arguments: %s" % unparse(ast))
         else:
             if not is_list(ast[1]):
                 raise LispError("the argument list for a lambda must be a list: %s" % unparse(ast))

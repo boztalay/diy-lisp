@@ -67,5 +67,53 @@
 (define append
     (lambda (list1 list2)
         (if (empty list1)
-            list2
-            (append (tail list1) (cons (head list1) list2)))))
+	    list2
+	    (cons (head list1) (append (tail list1) list2)))))
+
+(define filter
+    (lambda (pred list)
+    	(if (empty list)
+		list
+		(if (pred (head list))
+			(cons (head list) (filter pred (tail list)))
+			(filter pred (tail list))))))
+
+(define map
+	(lambda (func list)
+		(if (empty list)
+			list
+			(cons (func (head list)) (map func (tail list))))))
+
+(define reverse
+	(lambda (list)
+		(reverse_helper list '())))
+
+(define reverse_helper
+	(lambda (listToReverse reversedList)
+		(if (empty listToReverse)
+			reversedList
+			(reverse_helper (tail listToReverse) (cons (head listToReverse) reversedList)))))
+
+(define range
+	(lambda (lower upper)
+		(range_helper lower upper '())))
+
+(define range_helper
+	(lambda (lower upper list)
+		(if (> lower upper)
+			list
+			(range_helper lower (- upper 1) (cons upper list)))))
+
+(define sort
+	(lambda (list)
+		(if (empty list)
+			list
+			(sort_insert (head list) (sort (tail list))))))
+
+(define sort_insert
+	(lambda (toInsert list)
+		(if (empty list)
+			(cons toInsert '())
+			(if (> (head list) toInsert)
+				(cons toInsert list)
+				(cons (head list) (sort_insert toInsert (tail list)))))))
